@@ -13,23 +13,18 @@ class XylophoneApp extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: Container(
+              color: Colors.black,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      final player = AudioCache();
-                      player.play('note1.wav');
-                    },
-                    child: Text(nouns.last),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      final player = AudioCache();
-                      player.play('note2.wav');
-                    },
-                    child: Text(nouns.first),
-                  ),
+                  createButton(Colors.green,1),
+                  createButton(Colors.yellow,2),
+                  createButton(Colors.orange,3),
+                  createButton(Colors.red,4),
+                  createButton(Colors.pink,5),
+                  createButton(Colors.purple,6),
+                  createButton(Colors.blue,7),
                 ],
               ),
             ),
@@ -39,3 +34,15 @@ class XylophoneApp extends StatelessWidget {
     );
   }
 }
+
+Widget createButton(Color color,int soundNumber) => Expanded(
+      flex: 1,
+      child: FlatButton(
+        color: color,
+        onPressed: () {
+          final player = AudioCache();
+          player.play('note$soundNumber.wav');
+        },
+        child: Text(nouns[soundNumber].toString()),
+      ),
+    );
